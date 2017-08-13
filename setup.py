@@ -3,7 +3,8 @@ from distutils.core import setup
 install_requires = [
     'docopt',
     'lxml',
-    'beautifulsoup4']
+    'beautifulsoup4',
+    'requests']
 
 setup(name='craigslist2org',
       version='0.0',

@@ -36,6 +36,7 @@ def prepare_org(data, header_level=1):
 :PROPERTIES:
 :URL: {data.get('url', '')}
 :PRICE: {data['price']}
+:POSTED: {data['posted_date']}
 :END:
 """
 

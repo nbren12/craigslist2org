@@ -24,8 +24,7 @@ def parse_craiglist(html_doc):
 
 
 def prepare_org(data, header_level=1):
-    return f"""
-{'*'*header_level} [[{data.get('url','')}][{data['title']} - {data['price']}]]
+    return f"""{'*'*header_level} [[{data.get('url','')}][{data['title']} - {data['price']}]]
 :PROPERTIES:
 :URL: {data.get('url', '')}
 :PRICE: {data['price']}

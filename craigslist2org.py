@@ -10,13 +10,15 @@ Notes:
 
 Add this to your emacs dotfile to capture the output of this command
 
-(defun craigslist-org ()
-;; pull info from craigslist page into org-mode header
-(interactive)
-(org-insert-heading-respect-content)
-(let ((url (read-string "Enter Craigslist URL: ")))
-    (insert
-    (shell-command-to-string (concat "craigslist2org.py -n 0 " url)))))
+  (defun craigslist-org ()
+    ;; pull info from craigslist page into org-mode header
+    (interactive)
+    (let ((url (read-string "Enter Craigslist URL: ")))
+      (org-insert-heading-respect-content)
+      (insert
+       (shell-command-to-string (concat "craigslist2org.py -n 0 " url)))))
+
+  (evil-leader/set-key "oc" 'craigslist-org)
 """
 import requests
 from bs4 import BeautifulSoup

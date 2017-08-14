@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """Generate org-mode entry from craigslist url
 
-Usage:
-  craigslist2org.py <url>
+Usage: craigslist2org.py [-n N] <url>
+
+  -n N     Header level [default: 0]
 """
 import requests
 from bs4 import BeautifulSoup
@@ -20,14 +21,6 @@ def parse_craiglist(html_doc):
     title = soup.find_all(id='titletextonly')[0].string
 
     return dict(title=title, price=price, posted_date=date)
-
-
-def grab(url):
-    html_doc = requests.get(url).text
-    data = parse_craiglist(html_doc)
-    data['url'] = url
-
-    return prepare_org(data)
 
 
 def prepare_org(data, header_level=1):
@@ -61,7 +54,16 @@ def test_prepare_org():
 
 def main():
     args = docopt(__doc__)
-    print(grab(args['<url>']))
+
+    url = args['<url>']
+
+    html_doc = requests.get(url).text
+    data = parse_craiglist(html_doc)
+    data['url'] = url
+
+    org_string =  prepare_org(data, header_level=int(args['-n']))
+    print(org_string)
+
 
 
 if __name__ == '__main__':
